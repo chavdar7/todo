@@ -94,12 +94,12 @@ def add():
     date = request.form["date"]
     title = request.form["title"]
     description = request.form["description"]
-    is_finish = request.form["is_finish"]
+    # finish = request.form["is_finish"]
 
     # Insert data into the table
     cur.execute('''
-        INSERT INTO todo(data,title,description,is_finish)
-        VALUES(%s,%s,%s,%d)''',(date,title,description,is_finish)
+        INSERT INTO todo(date,title,description)
+        VALUES(%s,%s,%s)''',(date,title,description)
     )
 
     conn.commit()
@@ -124,15 +124,15 @@ def update():
     cur = conn.cursor() 
   
     # Get the data from the form 
-    name = request.form['name'] 
-    surname = request.form['surname']
-    price = request.form['price'] 
-    id = request.form['id'] 
+    date = request.form['date'] 
+    title = request.form['title']
+    description = request.form['description'] 
+    id = request.form['id']
   
     # Update the data in the table 
     cur.execute( 
-        '''UPDATE people 
-        SET name=%s, price=%s, surname=%s WHERE id=%s''', (name, price, surname, id)) 
+        '''UPDATE todo 
+        SET date=%s, title=%s, description=%s WHERE id=%s''', (date, title, description, id)) 
   
     # commit the changes 
     conn.commit() 
@@ -158,7 +158,7 @@ def delete():
     id = request.form["id"]
 
     cur.execute('''
-    DELETE FROM people WHERE id = %s''',(id,)
+    DELETE FROM todo WHERE id = %s''',(id,)
     )
 
     conn.commit()
