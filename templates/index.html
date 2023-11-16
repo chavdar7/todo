@@ -9,64 +9,58 @@
 
 </head>
 <body>
-    <h1 style="text-align: center;" class="mt-5">to-do list</h1>
-    <table class="mx-auto">
+    <div class="container">
+        <h1 style="text-align: center;" class="mt-5">to-do list</h1>
+        <table class="mx-auto table table-striped border">
 
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>date</th>
-                <th>title</th>
-                <th>description</th>
-            </tr>
-        <thead>
-        
-        <tbody>
-            {% for row in data %}
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">date</th>
+                    <th scope="col">title</th>
+                    <th scope="col">description</th>
+                    <th scope="col">güncelle</th>
+                    <th scope="col">delete</th>
+                </tr>
+            <thead>
             
-            <tr> 
-                <td>{{ row[4] }}</td>
-                <td>{{ row[0] }}</td>
-                <td>{{ row[1] }}</td>
-                <td>{{ row[2] }}</td>
-                <td>
+            <tbody>
+                {% for row in data %}
+                
+                <tr>
                     <form action="/guncel" method="post">
-                        <input type="hidden" name="id" value="{{ row[4] }}">
-                        <input type="text" name="date" value="{{ row[0] }}">
-                        <input type="text" name="title" value="{{ row[1] }}">
-                        <input type="text" name="description" value="{{ row[2] }}">
-                        <input type="submit" value="güncelle">
+                        <td class="border"><input type="hidden" name="id" value="{{ row[4] }}">{{ row[4] }}</td>
+                        <td class="border"><input type="text" name="date" value="{{ row[0] }}"></td>
+                        <td class="border"><input type="text" name="title" value="{{ row[1] }}"></td>
+                        <td class="border"><input type="text" name="description" value="{{ row[2] }}"></td>
+                        <td class="border"><input type="submit" value="güncelle"></td>
                     </form>
-                </td>
-                <td>
                     <form action="/delete" method="post">
                         <input type="hidden" name="id" value="{{ row[4] }}">
-                        <input type="submit" value="delete">
+                        <td><input type="submit" value="delete"></td>
                     </form>
-                </td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <br><hr class="mx-auto"><br>
+
+    <div class="container">
+        <h2 style="text-align: center;">Yeni Görev Ekle</h2>
+        <table class="mx-auto table">
+            <tr>
+                    <form action="/add" method="post">
+                        <td><input type="text" name="date" placeholder="date"></td>
+                        <td><input type="text" name="title" placeholder="title"></td>
+                        <td><input type="text" name="description" placeholder="description"></td>
+                        <td><input type="submit" value="add"></td>
+                    </form>
             </tr>
-
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <br><hr class="w-75 mx-auto"><br>
-
-    
-    <h2 style="text-align: center;">Yeni İnsan Ekle</h2>
-    <table class="mx-auto">
-        <tr>
-            <td>
-                <form action="/add" method="post">
-                    <input type="text" name="date" placeholder="date">
-                    <input type="text" name="title" placeholder="title">
-                    <input type="text" name="description" placeholder="description">
-                    <input type="submit" value="add">
-                </form>
-            </td>
-        </tr>
-    </table>
-
+        </table>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
